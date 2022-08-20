@@ -1,0 +1,22 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "API code for services used in IAMM",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/garvazsof/IAMM-ETH.git"
+  },
+  "keywords": [
+    "IAMM"
+  ],
+  "author": "garvazsof",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/garvazsof/IAMM-ETH/issues"
+  },
+  "homepage": "https://github.com/garvazsof/IAMM-ETH#readme"
+}

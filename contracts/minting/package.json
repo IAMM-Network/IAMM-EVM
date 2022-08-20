@@ -1,0 +1,25 @@
+{
+  "name": "minting",
+  "version": "1.0.0",
+  "description": "NFT smart contracts project for IAMM",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/garvazsof/IAMM-ETH.git"
+  },
+  "keywords": [
+    "ERC721",
+    "ERC1155",
+    "Minting",
+    "ERC4907"
+  ],
+  "author": "garvazsof",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/garvazsof/IAMM-ETH/issues"
+  },
+  "homepage": "https://github.com/garvazsof/IAMM-ETH#readme"
+}

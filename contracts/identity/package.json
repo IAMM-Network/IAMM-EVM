@@ -1,0 +1,24 @@
+{
+  "name": "identity",
+  "version": "1.0.0",
+  "description": "Contracts for Identity and ERC725 used in IAMM",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/garvazsof/IAMM-ETH.git"
+  },
+  "keywords": [
+    "ERC725",
+    "Identity",
+    "IAMM"
+  ],
+  "author": "luisantoniocrag",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/garvazsof/IAMM-ETH/issues"
+  },
+  "homepage": "https://github.com/garvazsof/IAMM-ETH#readme"
+}
