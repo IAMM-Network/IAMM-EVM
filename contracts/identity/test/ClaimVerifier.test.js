@@ -40,8 +40,27 @@ describe("Claim Verifier", function () {
     await ClaimVerifier.deployed()
   })
 
-  it('should new wallets access to collector-profile', async function() {
+  it('should return empty ERC725 addresses for a new user', async function() {
+    const result = await ClaimVerifier.getERC725At(
+      String(addr4.address)
+    )
+    expect(result.length).to.be.equal(0)
+  })
+
+  it('should store ERC725 for a user an then check that it exists', async function() {
+    const noStored =  await ClaimVerifier.getERC725At(
+      String(addr1.address)
+    )
+    expect(noStored.length).to.be.equal(0)
     
+    await ClaimVerifier.saveERC725At(addr1.address, UserIdentity.address)
+    
+    //Check if it actually is stored
+    const stored =  await ClaimVerifier.getERC725At(
+      String(addr1.address)
+    )
+    expect(stored.length).to.be.equal(1)
+    expect(stored[0]).to.be.equal(UserIdentity.address)
   })
 
   it('should allow verifier owner to addKey', async function() {

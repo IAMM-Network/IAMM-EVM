@@ -5,8 +5,16 @@ import "./ERC735.sol";
 import "./KeyHolder.sol";
 
 contract ClaimHolder is KeyHolder, ERC735 {
+    // ERC725 - Smart Contract based Account
+    bytes4  private constant _INTERFACEID_ERC725X = 0x44c028fe;
+    bytes4 private constant _INTERFACEID_ERC725Y = 0x714df77c;
+
     mapping(bytes32 => Claim) claims;
     mapping(uint256 => bytes32[]) claimsByType;
+
+    function supportsInterface(bytes4 interfaceId) public pure returns (bool) {
+        return(interfaceId == _INTERFACEID_ERC725X || interfaceId == _INTERFACEID_ERC725Y);
+    }
 
     function addClaim(
         uint256 _claimType,
@@ -24,9 +32,8 @@ contract ClaimHolder is KeyHolder, ERC735 {
             );
         }
 
-        if (claims[claimId].issuer != _issuer) {
+        if (claims[claimId].issuer != _issuer)
             claimsByType[_claimType].push(claimId);
-        }
 
         claims[claimId].claimType = _claimType;
         claims[claimId].scheme = _scheme;
