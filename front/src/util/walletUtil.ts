@@ -1,17 +1,19 @@
 import SignClient from "@walletconnect/sign-client";
 import QRCodeModal from "@walletconnect/qrcode-modal";
 
-export const onSessionConnected = (data:any) => console.log(data) 
-
 export class WalletUtil {
     public static projectId = "d01df257d7ed76cf52851e91d2021adb"
-    public static async connectWallet() {
+    public static async connectWallet(
+        onSignIn:any,
+        onSetAddress:any,
+        saveSession:any
+        ) {
 
         try {
             const signClient = await SignClient.init({
                 projectId: WalletUtil.projectId,
                 metadata: {
-                    name: "IAMM - Polygon - WalletConnect",
+                    name: "IAMM - (Polygon - WalletConnect) 🚀",
                     description: "Building libre and creative economies through impact meta-markets",
                     url: "www.iamm.network",
                     icons: ["https://iamm.network/static/media/iamm-home.ed82176cc59e1f880bfb.png"],
@@ -45,7 +47,9 @@ export class WalletUtil {
             // Await session approval from the wallet.
             const session = await approval();
             // Handle the returned session (e.g. update UI to "connected" state).
-            await onSessionConnected(session);
+            await onSignIn(session.acknowledged);
+            await onSetAddress(session.namespaces.eip155.accounts[0].split(":")[2]);
+            await saveSession(session)
         } catch(e){
             console.log(e)
         } finally {

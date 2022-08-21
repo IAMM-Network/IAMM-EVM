@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { Container } from '../Layout'
 import { HeaderWrapper } from './styles'
 import { DiscordMediaIcon, IAMMTextIcon, TwitterMediaIcon } from '../Svg'
 import { Box, Flex } from '../Box'
 import Hamburger from 'hamburger-react'
+import { Context } from '../../contexts/UserProfile'
 
 const socialMedia = () => (
   <Flex>
@@ -31,6 +32,8 @@ const Header: React.FC = () => {
   const { pathname } = useLocation()
   const [isOpen, setIsOpen] = useState(false)
 
+  const {userAddress} = useContext(Context)
+
   const getRender = (): boolean => pathname !== '/'
 
   if (pathname !== '/profile-dashboard')
@@ -39,6 +42,7 @@ const Header: React.FC = () => {
         <Container maxWidth='90%'>
           <Flex alignItems='center' justifyContent='space-between' width='100%'>
             <IAMMTextIcon width='100px' fill='white' />
+            {userAddress.length > 3 && userAddress}
             {getRender() ? hamburguerMenu('white', isOpen, setIsOpen) : socialMedia()}
           </Flex>
         </Container>
