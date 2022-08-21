@@ -7,20 +7,29 @@
 const hre = require("hardhat");
 
 async function main() {
-  const currentTimestampInSeconds = Math.round(Date.now() / 1000);
-  const ONE_YEAR_IN_SECS = 365 * 24 * 60 * 60;
-  const unlockTime = currentTimestampInSeconds + ONE_YEAR_IN_SECS;
 
-  const lockedAmount = hre.ethers.utils.parseEther("1");
 
-  const Lock = await hre.ethers.getContractFactory("Lock");
-  const lock = await Lock.deploy(unlockTime, { value: lockedAmount });
+  // await lock.deployed();
+  const RentableIAMM = await hre.ethers.getContractFactory("RentableIAMM");
+  const rentableIAMM = await RentableIAMM.deploy("GameItemIAMM","GII");
 
-  await lock.deployed();
+  await rentableIAMM.deployed();
 
   console.log(
-    `Lock with 1 ETH and unlock timestamp ${unlockTime} deployed to ${lock.address}`
+    `Deployed Rentable, address: ${rentableIAMM.address} transaction to ${rentableIAMM.deployTransaction.hash}`
   );
+
+  let maxSupply = "100000000000000000000000000";
+
+  const MetaToken = await hre.ethers.getContractFactory("MetaToken");
+  const metaToken = await MetaToken.deploy("MetaToken","MTIAAM", maxSupply.toLocaleString('fullwide', {useGrouping:false}));
+
+  await metaToken.deployed();
+
+  console.log(
+    `Deployed MetaToken, address: ${metaToken.address} transaction to ${metaToken.deployTransaction.hash}`
+  );
+
 }
 
 // We recommend this pattern to be able to use async/await everywhere
