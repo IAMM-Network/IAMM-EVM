@@ -7,20 +7,36 @@
 const hre = require("hardhat");
 
 async function main() {
-  const currentTimestampInSeconds = Math.round(Date.now() / 1000);
-  const ONE_YEAR_IN_SECS = 365 * 24 * 60 * 60;
-  const unlockTime = currentTimestampInSeconds + ONE_YEAR_IN_SECS;
 
-  const lockedAmount = hre.ethers.utils.parseEther("1");
 
-  const Lock = await hre.ethers.getContractFactory("Lock");
-  const lock = await Lock.deploy(unlockTime, { value: lockedAmount });
+  // await lock.deployed();
+  let price = "500000000000000000000";
+  let maxMintPerBuyer = 3;
+  let operationTokenContract = "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174";
+  let creatorWallet = "0x525808D718EC32AAd05Af1bb4D0CFC436ABC8Aa9";
+  let operationToken = 3; //USDC
+  let isTransferable = true;
+  const RentableIAMM = await hre.ethers.getContractFactory("RentableIAMM");
+  const rentableIAMM = await RentableIAMM.deploy("GameItemIAMM","GII","https://bafkreidd2utm732zmf4laytinnfdxfdd6arn6kooqtqfxthgnua5ttjt54.ipfs.nftstorage.link/",
+  price.toLocaleString('fullwide', {useGrouping:false}), maxMintPerBuyer, operationTokenContract, creatorWallet, operationToken, isTransferable);
 
-  await lock.deployed();
+  await rentableIAMM.deployed();
 
   console.log(
-    `Lock with 1 ETH and unlock timestamp ${unlockTime} deployed to ${lock.address}`
+    `Deployed Rentable, address: ${rentableIAMM.address} transaction to ${rentableIAMM.deployTransaction.hash}`
   );
+
+  let maxSupply = "100000000000000000000000000";
+
+  const MetaToken = await hre.ethers.getContractFactory("MetaToken");
+  const metaToken = await MetaToken.deploy("MetaToken","MTIAAM", maxSupply.toLocaleString('fullwide', {useGrouping:false}));
+
+  await metaToken.deployed();
+
+  console.log(
+    `Deployed MetaToken, address: ${metaToken.address} transaction to ${metaToken.deployTransaction.hash}`
+  );
+
 }
 
 // We recommend this pattern to be able to use async/await everywhere
