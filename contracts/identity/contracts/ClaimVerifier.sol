@@ -9,9 +9,22 @@ contract ClaimVerifier {
   event ClaimInvalid(ClaimHolder _identity, uint256 claimType);
 
   ClaimHolder public trustedClaimHolder;
+  
+  mapping(address => address[]) private _profilesToAddress; // Save the historical ERC725 contracts of a specific user.
 
   constructor (address _trustedClaimHolder) {
     trustedClaimHolder = ClaimHolder(_trustedClaimHolder);
+  }
+
+  //This functions is an easier way ClaimVerifier checks if a user has an specific ERC725 contract and then can be check a claim
+  //with checkClaim function.
+  function getERC725At(address _user) public view returns (address[] memory) {
+    return _profilesToAddress[_user];
+  }
+
+  //This is just a dummy function to save a ERC725 addresses for a specific user address.
+  function saveERC725At(address _user, address _profile) public {
+    _profilesToAddress[_user].push(_profile);
   }
 
   function checkClaim(ClaimHolder _identity, uint256 claimType) public view returns (bool claimValid) {
