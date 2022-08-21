@@ -27,6 +27,7 @@ const Menu: React.FC = () => {
               style: { cursor: 'pointer' },
               fill: indexActived === index ? 'white' : '#6D6D6D',
               onClick: () => setIndexActived(index),
+              key: index + String(item)
             }),
           )}
         </Flex>

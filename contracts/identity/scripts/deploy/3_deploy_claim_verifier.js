@@ -1,12 +1,12 @@
 const hre = require("hardhat");
 
 async function main() {
-  const IssuerAddress = "0x0000000000000000000000000000000000000000";
+  const IssuerAddress = "0xa3681AE14FcAF9e11C826448ABe29b03f5b029f4";
 
   const ClaimVerifierABI = await hre.ethers.getContractFactory("ClaimVerifier");
-  const claimVerifier = await ClaimVerifierABI.deploy();
+  const claimVerifier = await ClaimVerifierABI.deploy(IssuerAddress);
 
-  await claimVerifier.deployed(IssuerAddress);
+  await claimVerifier.deployed();
 
   console.log("Claim Issuer Deploy:", claimVerifier.address);
 }
