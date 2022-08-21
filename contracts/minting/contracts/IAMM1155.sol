@@ -231,10 +231,7 @@ contract IAMM1155 is ERC165, IERC1155, IERC1155MetadataURI, Ownable, Pausable, A
         uint256 amount,
         bytes memory data
     ) public virtual override {
-        // require(
-        //     id & NFT_INDEX_MASK != 0, 
-        //     "NFT index 0 represents total NFTs holded and can't be transferred directly"
-        // );
+
         require(
             from == msg.sender || isApprovedForAll(from, msg.sender),
             "ERC1155: caller is not owner nor approved"
