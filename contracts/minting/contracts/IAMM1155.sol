@@ -330,4 +330,14 @@ contract IAMM1155 is ERC165, IERC1155, IERC1155MetadataURI, Ownable, Pausable, A
         }
     }
 
+    function _beforeTokenTransfer(
+        address operator,
+        address from,
+        address to,
+        uint256[] memory ids,
+        uint256[] memory amounts,
+        bytes memory data
+    ) internal virtual {}
+    
+
 }
