@@ -1,7 +1,7 @@
 # IAMM-EVM
-Code repository of IAMM Libre NFTs for ETH Mexico Hackathon.
+Code repository of IAMM libreNFTs- EVM version.
 
-Libre NFTs is our philosophy to give the creators, developers, collectors and curators the freedom to generate value and get rewards for the value generated.
+A libreNFT is not static, but a dynamic socio-technical system(digital good), evolvable through time, composable w/o limits, extensible in content & programmability.
 
 ## Contracts 
 
